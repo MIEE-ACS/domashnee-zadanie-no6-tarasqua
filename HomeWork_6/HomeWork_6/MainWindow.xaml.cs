@@ -417,6 +417,12 @@ namespace HomeWork_6
         {
             try
             {
+                if (double.Parse(tbExcessOfValueArea.Text) < 0 || double.Parse(tbExcessOfValueVolume.Text) < 0)
+                {
+                    MessageBox.Show("Значения площади и объема должны быть неотрицательными!");
+                    return;
+                }
+
                 var buddys = bodies.Where(x => x.SurfaceArea > double.Parse(tbExcessOfValueArea.Text)).Where(x => x.Volume > double.Parse(tbExcessOfValueVolume.Text));
 
                 if (buddys.Count() == 0)
@@ -426,7 +432,7 @@ namespace HomeWork_6
                 }
 
                 string result = buddys.Aggregate("Объем и площадь больше в фигурах:\n", (s, x) =>
-                                s += $"{x.counter}. {x.Type} {Math.Round(x.Volume, 2)}м³, {Math.Round(x.SurfaceArea, 2)}м². \n");
+                                s += $"{x.counter}. {x.Type} {Math.Round(x.Volume, 2)} м³, {Math.Round(x.SurfaceArea, 2)} м². \n");
 
                 MessageBox.Show(result);
             }
@@ -452,6 +458,7 @@ namespace HomeWork_6
             {
                 lbBody.Items.Add(body);
             }
+
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
